@@ -1,132 +1,147 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useLayoutEffect } from 'react';
 import { ArrowRight, ArrowLeft } from 'lucide-react';
+
+// Import GSAP and ScrollTrigger
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-// Register the ScrollTrigger plugin with GSAP
+// Register the ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
 
 const Features = () => {
-  const mainRef = useRef(null);
+  // A ref for the main container to scope our animations
+  const root = useRef(null);
 
-  useEffect(() => {
-    // Use GSAP Context for proper cleanup
+  useLayoutEffect(() => {
+    // gsap.context() is the modern way to handle cleanup in React.
+    // It automatically cleans up all GSAP animations and ScrollTriggers created within it when the component unmounts.
     const ctx = gsap.context(() => {
-      // --- REVISED ANIMATION LOGIC ---
-      // We will create separate, individually triggered animations for each section
-      // instead of one master timeline. This makes the component feel more responsive
-      // to the user's scroll position.
-
-      // The key is toggleActions: "restart none none none" which will replay the
-      // animation every time the element scrolls into view from the top.
-
-      // 1. Animate the top header elements
-      gsap.from(".features-title", {
-        yPercent: 50,
-        opacity: 0,
-        duration: 0.8,
-        ease: 'power3.out',
+      // --- HEADER ANIMATION ---
+      // Animate the main title and the small thumbnail description
+      const headerTimeline = gsap.timeline({
         scrollTrigger: {
-          trigger: ".features-title",
-          start: "top 85%",
-          toggleActions: "restart none none none",
-        }
-      });
-      gsap.from(".features-header-thumb", {
-        opacity: 0,
-        scale: 0.8,
-        duration: 0.6,
-        scrollTrigger: {
-          trigger: ".features-header-thumb",
-          start: "top 85%",
-          toggleActions: "restart none none none",
-        }
+          trigger: '.features-title',
+          start: 'top 85%', // Animate when 85% of the element is in view
+        },
       });
 
-      // 2. Animate the main content grid using a timeline for coordinated effects
-      const gridTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: ".main-content-grid",
-          start: "top 80%",
-          toggleActions: "restart none none none",
-        }
-      });
-
-      gridTl.from(".main-image", {
-        clipPath: 'inset(0 100% 0 0)',
-        duration: 1.2,
-        ease: 'power4.inOut',
-      })
-      .from(".avatar-bubbles", {
-          scale: 0.5,
+      headerTimeline
+        .from('.features-title', {
           opacity: 0,
-          stagger: 0.1,
-          duration: 0.5,
-      }, "-=0.8")
-      .from(".right-card", {
-          y: 60,
-          opacity: 0,
-          stagger: 0.2,
-          duration: 0.8,
+          y: 50,
+          duration: 1,
           ease: 'power3.out',
-      }, "-=0.8");
-
-      // 3. Animate the bottom navigation row
-      gsap.from(".bottom-nav", {
-        y: 30,
-        opacity: 0,
-        duration: 0.7,
-        scrollTrigger: {
-          trigger: ".bottom-nav",
-          start: "top 95%",
-          toggleActions: "restart none none none",
-        }
-      });
-
-      // 4. Animate the stats section
-      // First, fade in the container for each stat
-      gsap.from(".stat-item", {
-        opacity: 0,
-        y: 20,
-        stagger: 0.2,
-        duration: 0.6,
-        scrollTrigger: {
-          trigger: ".stats-container", // Trigger based on the container
-          start: "top 70%",
-          toggleActions: "restart none none none",
-        }
-      });
-
-      // Then, animate the numbers counting up, each triggered individually
-      gsap.utils.toArray(".stat-number").forEach(el => {
-        const targetNumber = parseFloat(el.textContent.replace(/[%+,]/g, ''));
-        gsap.from(el, {
-          textContent: 0,
-          duration: 3,
-          ease: "power2.out",
-          snap: { textContent: 1 }, // Snap to whole numbers
-          stagger: 1,
-          scrollTrigger: {
-            trigger: el,
-            start: "top 90%",
-            toggleActions: "restart none none none",
+        })
+        .from(
+          '.features-header-thumb',
+          {
+            opacity: 0,
+            x: 50,
+            duration: 1,
+            ease: 'power3.out',
           },
-          // A custom function to format the number during the animation
-          onUpdate: function() {
-            el.textContent = Math.round(this.targets()[0].textContent) + (el.dataset.suffix || '');
-          }
-        });
+          '-=0.7' // Start this animation 0.7s before the previous one ends
+        );
+        
+      // --- MAIN CONTENT GRID ANIMATION ---
+      const gridTimeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: '.main-content-grid',
+          start: 'top 80%',
+        }
       });
 
-    }, mainRef);
+      // Animate the large image with a subtle scale and fade
+      gridTimeline.from('.main-image', {
+        opacity: 0,
+        scale: 1.05,
+        duration: 1.2,
+        ease: 'power4.out',
+      });
 
-    // Cleanup function to revert all animations
-    return () => ctx.revert();
+      // Animate the avatar bubbles with a staggered pop-up effect
+      gridTimeline.from('.avatar-bubbles', {
+          opacity: 0,
+          y: 20,
+          scale: 0.8,
+          duration: 0.6,
+          stagger: 0.15,
+          ease: 'back.out(1.7)',
+      }, "-=0.8"); // Overlap with the main image animation
+
+      // Animate the two cards on the right, staggering them
+      gridTimeline.from('.right-card', {
+        opacity: 0,
+        x: 50,
+        duration: 0.8,
+        stagger: 0.2,
+        ease: 'power3.out',
+      }, "-=1"); // Overlap significantly for a cohesive feel
+
+      // --- BOTTOM NAV ANIMATION ---
+      gsap.from('.bottom-nav > *', {
+          scrollTrigger: {
+              trigger: '.bottom-nav',
+              start: 'top 90%',
+          },
+          opacity: 0,
+          y: 30,
+          duration: 0.8,
+          stagger: 0.2,
+          ease: 'power3.out',
+      });
+
+      // --- STATS COUNTER ANIMATION ---
+      // This is a more complex animation that triggers once when the section is entered.
+      const statsSection = document.querySelector('.stats-container');
+      ScrollTrigger.create({
+        trigger: statsSection,
+        start: 'top 80%',
+        once: true, // Ensure the animation only runs once
+        onEnter: () => {
+          // Animate the containers of the stats first
+          gsap.from('.stat-item', {
+            opacity: 0,
+            y: 40,
+            duration: 1,
+            stagger: 0.15,
+            ease: 'power3.out',
+          });
+
+          // Animate each number
+          gsap.utils.toArray('.stat-number').forEach((el) => {
+            const endText = el.textContent;
+            // Handle numbers with commas and suffixes like '+' or '%'
+            const endValue = parseFloat(endText.replace(/,/g, ''));
+            const suffix = endText.match(/[%+]/g)?.[0] || '';
+
+            gsap.fromTo(
+              el,
+              { textContent: '0' },
+              {
+                textContent: endValue,
+                duration: 2,
+                ease: 'power2.out',
+                snap: { textContent: 1 }, // Snap to whole numbers
+                onUpdate: () => {
+                  // Format with commas and add the suffix back
+                  el.textContent = Math.ceil(Number(el.textContent)).toLocaleString() + suffix;
+                },
+                delay: 0.5, // Start counting shortly after the container fades in
+              }
+            );
+          });
+        },
+      });
+
+    }, root); // Scope the context to the root element
+
+    return () => ctx.revert(); // Cleanup on component unmount
   }, []);
 
   return (
-    // Add the ref to the root element for GSAP context
-    <div ref={mainRef} className="bg-white py-24 sm:py-32 px-4 sm:px-8 lg:px-16 overflow-hidden">
+    // The ref is now attached to the root container
+    <div ref={root} className="bg-white py-24 sm:py-32 px-4 sm:px-8 lg:px-16 overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <div className="text-left mb-12 flex justify-between items-start">
             <h2 className="features-title text-4xl md:text-5xl font-bold text-gray-800 max-w-md">
@@ -142,7 +157,6 @@ const Features = () => {
             </div>
         </div>
 
-        {/* Added a wrapper with a class for a more precise trigger */}
         <div className="main-content-grid grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
           {/* Left Side */}
           <div className="relative">
@@ -184,23 +198,22 @@ const Features = () => {
             </div>
         </div>
         
-        {/* Stats Section - Added a wrapper with a class for a more precise trigger */}
+        {/* Stats Section - Numbers are now hardcoded with their suffixes */}
         <div className="stats-container mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div className="stat-item border-r border-gray-200">
-                <h3 className="stat-number text-4xl md:text-5xl font-bold text-gray-800" data-suffix="%">100</h3>
+                <h3 className="stat-number text-4xl md:text-5xl font-bold text-gray-800">100%</h3>
                 <p className="text-gray-500">Satisfactions Clients</p>
             </div>
             <div className="stat-item md:border-r border-gray-200">
-                <h3 className="stat-number text-4xl md:text-5xl font-bold text-gray-800" data-suffix="+">500</h3>
+                <h3 className="stat-number text-4xl md:text-5xl font-bold text-gray-800">500+</h3>
                 <p className="text-gray-500">Property sells</p>
             </div>
             <div className="stat-item border-r border-gray-200">
-                <h3 className="stat-number text-4xl md:text-5xl font-bold text-gray-800" data-suffix="+">150</h3>
+                <h3 className="stat-number text-4xl md:text-5xl font-bold text-gray-800">150+</h3>
                 <p className="text-gray-500">Countries & Cities</p>
             </div>
             <div className="stat-item">
-                {/* Corrected number and moved suffix to data attribute */}
-                <h3 className="stat-number text-4xl md:text-5xl font-bold text-gray-800" data-suffix="+">2000</h3>
+                <h3 className="stat-number text-4xl md:text-5xl font-bold text-gray-800">2,000+</h3>
                 <p className="text-gray-500">Positive reviews</p>
             </div>
         </div>
