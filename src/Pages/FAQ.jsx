@@ -25,7 +25,7 @@ const FAQ = () => {
                 <div className="flex flex-col md:flex-row gap-8 pt-2">
                     <p className="text-gray-600 flex-grow">{faq.answer}</p>
                     {index === 0 && (
-                        <img src="/src/assets/faq-interior.jpg" alt="Interior" className="w-full md:w-64 h-40 rounded-xl object-cover" />
+                        <img src="/images/faq-interior.jpg" alt="Interior" className="w-full md:w-64 h-40 rounded-xl object-cover" />
                     )}
                 </div>
               </div>

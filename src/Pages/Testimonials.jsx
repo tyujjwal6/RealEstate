@@ -12,17 +12,17 @@ const Testimonials = () => {
             <div className="avatar-group -space-x-6">
               <div className="avatar">
                 <div className="w-12">
-                  <img src="/src/assets/testimonial-person.jpg" />
+                  <img src="/images/testimonial-person.jpg" />
                 </div>
               </div>
               <div className="avatar">
                 <div className="w-12">
-                   <img src="/src/assets/testimonial-person-2.jpg" />
+                   <img src="/images/testimonial-person-2.jpg" />
                 </div>
               </div>
               <div className="avatar">
                 <div className="w-12">
-                   <img src="/src/assets/testimonial-person-3.jpg" />
+                   <img src="/images/testimonial-person-3.jpg" />
                 </div>
               </div>
             </div>

@@ -11,7 +11,7 @@ const Features = () => {
             </h2>
             <div className='hidden md:flex flex-col items-end text-right max-w-xs'>
                 <div className='flex items-center gap-4'>
-                    <img src="/src/assets/small-house-1.jpg" alt="thumbnail" className='w-20 h-20 rounded-2xl object-cover'/>
+                    <img src="/images/small-house-1.jpg" alt="thumbnail" className='w-20 h-20 rounded-2xl object-cover'/>
                     <p className="text-gray-600">
                         Each listing offers unique features, exceptional quality, and prime locations
                     </p>
@@ -22,11 +22,11 @@ const Features = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
           {/* Left Side */}
           <div className="relative">
-            <img src="/src/assets/modernhouse.jpg" alt="Modern House" className="rounded-3xl w-full h-auto object-cover"/>
+            <img src="/images/modernhouse.jpg" alt="Modern House" className="rounded-3xl w-full h-auto object-cover"/>
             <div className="absolute bottom-4 left-4 bg-white/80 backdrop-blur-sm p-2 rounded-full shadow-lg flex gap-2">
-                <img src="/src/assets/property-1.jpg" alt="thumb 1" className="w-16 h-16 rounded-full object-cover border-2 border-white"/>
-                <img src="/src/assets/property-2.jpg" alt="thumb 2" className="w-16 h-16 rounded-full object-cover border-2 border-white"/>
-                <img src="/src/assets/property-3.jpg" alt="thumb 3" className="w-16 h-16 rounded-full object-cover border-2 border-white"/>
+                <img src="/images/property-1.jpg" alt="thumb 1" className="w-16 h-16 rounded-full object-cover border-2 border-white"/>
+                <img src="/images/property-2.jpg" alt="thumb 2" className="w-16 h-16 rounded-full object-cover border-2 border-white"/>
+                <img src="/images/property-3.jpg" alt="thumb 3" className="w-16 h-16 rounded-full object-cover border-2 border-white"/>
             </div>
           </div>
 
@@ -41,7 +41,7 @@ const Features = () => {
             </div>
             
             <div className="relative">
-                <img src="/src/assets/small-house-1.jpg" alt="Modern Villa" className="rounded-3xl w-full h-64 object-cover"/>
+                <img src="/images/small-house-1.jpg" alt="Modern Villa" className="rounded-3xl w-full h-64 object-cover"/>
                 <div className="absolute inset-0 bg-black/30 rounded-3xl flex flex-col justify-end p-6 text-white">
                     <p>Pricing Start at $256K</p>
                     <button className="btn btn-ghost justify-between w-full mt-2">

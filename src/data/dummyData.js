@@ -1,7 +1,7 @@
 export const properties = [
     {
       id: 1,
-      image: '/src/assets/property-1.jpg',
+      image: '/images/property-1.jpg',
       bedrooms: 5,
       bathrooms: 2,
       title: "The Pinnacle at Highland Park",
@@ -10,7 +10,7 @@ export const properties = [
     },
     {
       id: 2,
-      image: '/src/assets/property-2.jpg',
+      image: '/images/property-2.jpg',
       bedrooms: 5,
       bathrooms: 2,
       title: "The Pinnacle at Highland Park",
@@ -19,7 +19,7 @@ export const properties = [
     },
     {
       id: 3,
-      image: '/src/assets/property-3.jpg',
+      image: '/images/property-3.jpg',
       bedrooms: 5,
       bathrooms: 2,
       title: "The Pinnacle at Highland Park",
@@ -28,7 +28,7 @@ export const properties = [
     },
     {
       id: 4,
-      image: '/src/assets/property-4.jpg',
+      image: '/images/property-4.jpg',
       bedrooms: 5,
       bathrooms: 2,
       title: "The Pinnacle at Highland Park",
@@ -37,7 +37,7 @@ export const properties = [
     },
     {
       id: 5,
-      image: '/src/assets/property-5.jpg',
+      image: '/images/property-5.jpg',
       bedrooms: 5,
       bathrooms: 2,
       title: "The Pinnacle at Highland Park",
@@ -46,7 +46,7 @@ export const properties = [
     },
     {
       id: 6,
-      image: '/src/assets/property-6.jpg',
+      image: '/images/property-6.jpg',
       bedrooms: 5,
       bathrooms: 2,
       title: "The Pinnacle at Highland Park",
@@ -61,21 +61,21 @@ export const properties = [
       name: 'Sajibur Rahman',
       role: 'UI UX Designer',
       quote: "Working with this team was a pleasure. They understood our vision and helped us find a property that exceeded our expectations. We couldn't have done it without them!",
-      image: '/src/assets/testimonial-person.jpg',
+      image: '/images/testimonial-person.jpg',
     },
     {
         id: 2,
         name: 'Jane Doe',
         role: 'Product Manager',
         quote: "An absolutely seamless experience from start to finish. The attention to detail and client care is unparalleled. Highly recommended for anyone looking for their dream home.",
-        image: '/src/assets/testimonial-person-2.jpg', // Add another image
+        image: '/images/testimonial-person-2.jpg', // Add another image
     },
     {
         id: 3,
         name: 'John Smith',
         role: 'Software Engineer',
         quote: "EverGreen found us the perfect property that fit our budget and lifestyle. The team is professional, knowledgeable, and genuinely cares about their clients.",
-        image: '/src/assets/testimonial-person-3.jpg', // Add another image
+        image: '/images/testimonial-person-3.jpg', // Add another image
     },
   ];
 

@@ -7,7 +7,7 @@ const Discover = () => {
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         {/* Left Side: Map */}
         <div>
-          <img src="/src/assets/map.jpg" alt="Map with property location" className="rounded-2xl shadow-lg"/>
+          <img src="/images/map.jpg" alt="Map with property location" className="rounded-2xl shadow-lg"/>
         </div>
 
         {/* Right Side: Text Content */}
