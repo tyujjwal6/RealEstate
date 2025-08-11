@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { ChevronDown, Search } from 'lucide-react';
+import hero from '/public/images/hero.jpg';
 import { gsap } from 'gsap';
 
 const Hero = () => {
@@ -80,7 +81,7 @@ const Hero = () => {
         */}
         <div 
           className="hero-bg-img absolute inset-0 w-full h-full bg-cover bg-center"
-          style={{ backgroundImage: `url('/images/hero.jpg')` }}
+          style={{ backgroundImage: `url(${hero})` }}
         ></div>
 
         <div className="hero-overlay bg-opacity-30"></div>
