@@ -22,7 +22,7 @@ function App() {
         <main>
           <Hero />
           {/* Added margin-top to account for the absolute-positioned search bar from Hero */}
-          <div className="mt-32"> 
+          <div className=""> 
               <Features />
               <Discover />
               <PremierHouses />

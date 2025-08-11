@@ -69,32 +69,28 @@ const Hero = () => {
   return (
     // Add the ref to the root element
     <div ref={heroRef}>
+      {/* 
+        FIX 1: Added responsive bottom padding to the hero container.
+        - `pb-64` on mobile creates space for the smaller form.
+        - `md:pb-60` and `lg:pb-32` adjust the spacing for larger screens.
+      */}
       <div 
-        className="hero min-h-screen relative overflow-hidden" // overflow-hidden is crucial for the zoom effect
+        className="hero min-h-screen relative overflow-hidden pb-64 md:pb-60 lg:pb-32"
       >
-        {/*
-          SOLUTION for the image:
-          The background image is placed on its own div. This allows us to animate it
-          (scale, opacity) without affecting the overlay or any content on top.
-          The original image URL from your code is used here.
-        */}
         <div 
           className="hero-bg-img absolute inset-0 w-full h-full bg-cover bg-center"
           style={{ backgroundImage: "url('/images/hero.jpg')" }}
-
         ></div>
 
         <div className="hero-overlay bg-opacity-30"></div>
         <div className="hero-content text-neutral-content w-full px-4 sm:px-8 lg:px-16 flex flex-col items-start">
           <div className="max-w-4xl">
-              {/* Added a class "hero-tag" to each button for GSAP targeting */}
               <div className='flex gap-2 mb-4'>
                   <button className='hero-tag btn btn-sm rounded-full bg-white bg-opacity-20 border-white text-white backdrop-blur-sm'>House</button>
                   <button className='hero-tag btn btn-sm rounded-full bg-white bg-opacity-20 border-white text-white backdrop-blur-sm'>Apartment</button>
                   <button className='hero-tag btn btn-sm rounded-full bg-white bg-opacity-20 border-white text-white backdrop-blur-sm'>Residential</button>
               </div>
 
-            {/* Wrapped title in a div with overflow-hidden for the reveal effect */}
             <div className="overflow-hidden">
                 <h1 className="hero-title mb-5 text-5xl md:text-7xl font-bold">Build Your Future, One Property at a Time.</h1>
             </div>
@@ -102,11 +98,23 @@ const Hero = () => {
           </div>
         </div>
         
-        {/* Search Form: Added "search-form" class for targeting the whole container */}
-        <div className="search-form absolute -bottom-3 w-full px-4 sm:px-8 lg:px-16">
-              <div className="bg-white p-6 rounded-2xl shadow-lg w-full max-w-6xl mx-auto text-black">
-                  {/* Added "form-item" class to all children for staggered animation */}
-                  <h2 className="form-item text-xl font-bold mb-4">Find the best place</h2>
+        {/*
+          FIX 2: Position the form inside the new padded area.
+          - `bottom-4` places it neatly at the bottom of the container.
+        */}
+        <div className="search-form absolute bottom-4 w-full px-4 sm:px-8 lg:px-16">
+              {/*
+                FIX 3: Make the form card itself smaller on mobile.
+                - `p-4` for mobile (smaller padding).
+                - `md:p-6` for medium screens and up (original padding).
+              */}
+              <div className="bg-white p-4 md:p-6 rounded-2xl shadow-lg w-full max-w-6xl mx-auto text-black">
+                  {/*
+                    FIX 4: Make the form title smaller on mobile.
+                    - `text-lg` and `mb-3` for mobile.
+                    - `md:text-xl` and `md:mb-4` for medium screens and up.
+                  */}
+                  <h2 className="form-item text-lg md:text-xl font-bold mb-3 md:mb-4">Find the best place</h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 items-end">
                       <div className="form-item form-control w-full">
                           <label className="label"><span className="label-text font-semibold">Looking for</span></label>
