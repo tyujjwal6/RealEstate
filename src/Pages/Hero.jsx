@@ -69,13 +69,8 @@ const Hero = () => {
   return (
     // Add the ref to the root element
     <div ref={heroRef}>
-      {/* 
-        FIX 1: Added responsive bottom padding to the hero container.
-        - `pb-64` on mobile creates space for the smaller form.
-        - `md:pb-60` and `lg:pb-32` adjust the spacing for larger screens.
-      */}
       <div 
-        className="hero min-h-screen relative overflow-hidden pb-64 md:pb-60 lg:pb-32"
+        className="hero min-h-screen relative overflow-hidden pb-56 md:pb-60 lg:pb-32"
       >
         <div 
           className="hero-bg-img absolute inset-0 w-full h-full bg-cover bg-center"
@@ -83,7 +78,11 @@ const Hero = () => {
         ></div>
 
         <div className="hero-overlay bg-opacity-30"></div>
-        <div className="hero-content text-neutral-content w-full px-4 sm:px-8 lg:px-16 flex flex-col items-start">
+        {/* 
+          FIX: Added "-translate-y-16" to move the entire text content block up slightly.
+          This gives more visual separation between the text and the form below.
+        */}
+        <div className="hero-content -translate-y-16 text-neutral-content w-full px-4 sm:px-8 lg:px-16 flex flex-col items-start">
           <div className="max-w-4xl">
               <div className='flex gap-2 mb-4'>
                   <button className='hero-tag btn btn-sm rounded-full bg-white bg-opacity-20 border-white text-white backdrop-blur-sm'>House</button>
@@ -98,39 +97,25 @@ const Hero = () => {
           </div>
         </div>
         
-        {/*
-          FIX 2: Position the form inside the new padded area.
-          - `bottom-4` places it neatly at the bottom of the container.
-        */}
         <div className="search-form absolute bottom-4 w-full px-4 sm:px-8 lg:px-16">
-              {/*
-                FIX 3: Make the form card itself smaller on mobile.
-                - `p-4` for mobile (smaller padding).
-                - `md:p-6` for medium screens and up (original padding).
-              */}
               <div className="bg-white p-4 md:p-6 rounded-2xl shadow-lg w-full max-w-6xl mx-auto text-black">
-                  {/*
-                    FIX 4: Make the form title smaller on mobile.
-                    - `text-lg` and `mb-3` for mobile.
-                    - `md:text-xl` and `md:mb-4` for medium screens and up.
-                  */}
                   <h2 className="form-item text-lg md:text-xl font-bold mb-3 md:mb-4">Find the best place</h2>
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 items-end">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-2 md:gap-4 items-end">
                       <div className="form-item form-control w-full">
-                          <label className="label"><span className="label-text font-semibold">Looking for</span></label>
-                          <input type="text" placeholder="Enter type" className="input input-bordered w-full bg-gray-100" />
+                          <label className="label py-1"><span className="label-text font-semibold">Looking for</span></label>
+                          <input type="text" placeholder="Enter type" className="input input-sm input-bordered w-full bg-gray-100" />
                       </div>
                       <div className="form-item form-control w-full">
-                          <label className="label"><span className="label-text font-semibold">Price</span></label>
-                          <select className="select select-bordered w-full bg-gray-100">
+                          <label className="label py-1"><span className="label-text font-semibold">Price</span></label>
+                          <select className="select select-sm select-bordered w-full bg-gray-100">
                               <option>Price</option>
                               <option>$100,000 - $200,000</option>
                               <option>$200,000 - $500,000</option>
                           </select>
                       </div>
                       <div className="form-item form-control w-full">
-                          <label className="label"><span className="label-text font-semibold">Locations</span></label>
-                          <select className="select select-bordered w-full bg-gray-100">
+                          <label className="label py-1"><span className="label-text font-semibold">Locations</span></label>
+                          <select className="select select-sm select-bordered w-full bg-gray-100">
                               <option>Location</option>
                               <option>New York</option>
                               <option>Denver</option>
@@ -138,24 +123,24 @@ const Hero = () => {
                           </select>
                       </div>
                       <div className="form-item form-control w-full">
-                          <label className="label"><span className="label-text font-semibold">Number of rooms</span></label>
-                          <select className="select select-bordered w-full bg-gray-100">
+                          <label className="label py-1"><span className="label-text font-semibold">Number of rooms</span></label>
+                          <select className="select select-sm select-bordered w-full bg-gray-100">
                               <option>2 Bed rooms</option>
                               <option>3 Bed rooms</option>
                               <option>4+ Bed rooms</option>
                           </select>
                       </div>
-                      <button className="form-item btn bg-gray-800 hover:bg-black text-white w-full lg:w-auto lg:h-[48px] self-end">
+                      <button className="form-item btn btn-md bg-gray-800 hover:bg-black text-white w-full lg:w-auto self-end">
                           <Search size={20} className="mr-2"/>
                           Search Properties
                       </button>
                   </div>
-                  <div className="form-item flex items-center gap-4 mt-4">
+                  <div className="form-item flex flex-wrap items-center gap-2 mt-4">
                       <span className="font-semibold">Filter:</span>
-                      <button className="btn btn-sm btn-outline rounded-full">City</button>
-                      <button className="btn btn-sm btn-outline rounded-full">House</button>
-                      <button className="btn btn-sm btn-outline rounded-full">Residential</button>
-                      <button className="btn btn-sm btn-outline rounded-full">Apartment</button>
+                      <button className="btn btn-xs md:btn-sm btn-outline rounded-full">City</button>
+                      <button className="btn btn-xs md:btn-sm btn-outline rounded-full">House</button>
+                      <button className="btn btn-xs md:btn-sm btn-outline rounded-full">Residential</button>
+                      <button className="btn btn-xs md:btn-sm btn-outline rounded-full">Apartment</button>
                   </div>
               </div>
         </div>
